@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!--
+      This default ConsoleAppender is used to log all NON perf4j messages
+      to System.out
+    -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] - &lt;%m&gt;%n"/>
+        </layout>
+    </appender>
+
+    <appender name="karmelos" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="karmelos.log" />
+        <param name="MaxFileSize" value="10MB" />
+        <param name="MaxBackupIndex" value="3" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] - %m%n"/>
+        </layout>
+    </appender>
+
+    <!--
+        WARNING: Setting the org.springframework logger to INFO displays INFO information about
+        the request parameter values being bound to the command objects.  This could expose your
+        password in the log file.  If you are sharing your log files, it is recommend you selectively
+        apply INFO level logging on a an org.springframework.* package level (i.e. org.springframework.dao)
+    -->
+    <logger name="org.springframework">
+        <level value="INFO" />
+    </logger>
+
+    <!-- specify the logging level for loggers from other libraries -->
+    <logger name="com.opensymphony">
+    	<level value="INFO" />
+    </logger>
+
+    <logger name="org.apache">
+    	 <level value="INFO" />
+    </logger>
+
+    <logger name="org.apache.struts2">
+    	 <level value="INFO" />
+    </logger>
+
+    <logger name="org.hibernate">
+    	 <level value="INFO" />
+    </logger>
+
+    <logger name="com.karmelos">
+    	 <level value="INFO" />
+    </logger>
+
+    <!--
+      The root logger sends all log statements EXCEPT those sent to the perf4j
+      logger to System.out.
+    -->
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="console"/>
+    </root>
+</log4j:configuration>
