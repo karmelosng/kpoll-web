@@ -15,5 +15,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/amacodecode/Downloads/google-gson-2.2.4/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
