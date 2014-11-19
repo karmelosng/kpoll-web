@@ -16,6 +16,12 @@ public class BaseAction extends ActionSupport {
 		this.persistenceService = persistenceService;
 	}
 
+	@Override
+	public String execute() throws Exception {
+		// TODO Auto-generated method stub
+		return "success";
+	}
+
 	
 	
 }

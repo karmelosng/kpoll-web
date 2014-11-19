@@ -1,15 +1,8 @@
 package com.karmelos.kpoll.servlet;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -17,28 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-
-import net.sf.json.JSONObject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.HttpRequestHandler;
 
-import com.google.android.gcm.server.Message;
-import com.google.android.gcm.server.Result;
-import com.google.android.gcm.server.Sender;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.karmelos.kpoll.model.*;
+import com.karmelos.kpoll.model.ChoicePoll;
+import com.karmelos.kpoll.model.FreeTextPoll;
+import com.karmelos.kpoll.model.InterestArea;
+import com.karmelos.kpoll.model.KeywordPoll;
+import com.karmelos.kpoll.model.Participant;
+import com.karmelos.kpoll.model.PollAdmin;
+import com.karmelos.kpoll.model.PollOwner;
+import com.karmelos.kpoll.model.PollSurvey;
 import com.karmelos.kpoll.service.PersistenceService;
 import com.karmelos.kpoll.util.PollContent;
 import com.karmelos.kpoll.util.ServletUtil;
@@ -170,6 +155,14 @@ public class PollHandler implements HttpRequestHandler {
 			PollOwner owner = (PollOwner) persistenceService.retrieveAnyEntity(
 					PollOwner.class, request.getParameter("email"));
 			List<PollSurvey> lv = persistenceService.listPollsByOwner(owner);
+			ServletOutputStream oos = response.getOutputStream();
+			oos.write(ServletUtil.serialize(lv));
+			
+
+		}else if (cmd.equals("listinterestarea")) {
+			
+		
+			List<InterestArea> lv = persistenceService.loadInterestAreas();
 			ServletOutputStream oos = response.getOutputStream();
 			oos.write(ServletUtil.serialize(lv));
 			

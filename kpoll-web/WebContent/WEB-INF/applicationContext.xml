@@ -21,7 +21,6 @@
 	<bean id="pollServlet" class="com.karmelos.kpoll.servlet.PollHandler">
 		<property name="persistenceService" ref="persistenceService" />
 	</bean>
-
    
    	<bean id="baseAction" class="com.karmelos.kpoll.action.BaseAction">
    		<property name="persistenceService" ref="persistenceService" />
